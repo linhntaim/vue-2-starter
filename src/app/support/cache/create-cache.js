@@ -1,14 +1,14 @@
-import {registerPropertyFactory} from '../helpers'
+import {registerGlobalPropertyFactory} from '../helpers'
 import {CacheManager} from './cache-manager'
 
 export function createCache(extend = {}) {
     return {
         installer: {
             install(Vue) {
-                registerPropertyFactory(Vue, '$cacheManager', function(app)  {
+                registerGlobalPropertyFactory(Vue, '$cacheManager', function(app)  {
                     return new CacheManager(app).extend(extend)
                 })
-                registerPropertyFactory(Vue, '$cache', function(app)  {
+                registerGlobalPropertyFactory(Vue, '$cache', function(app)  {
                     return app.$cacheManager.driver()
                 })
             },

@@ -8,14 +8,15 @@ export const vueStart = time()
 
 Vue.config.productionTip = false
 
-Vue.use(createStart(vueStart).installer)
-
 export const app = new Vue(
     modify(
         {
             render: h => h(App),
         },
         function (options) {
+            // register start plugin
+            Vue.use(createStart(vueStart).installer)
+            // register plugins
             Object.keys(providers).forEach(key => {
                 const provider = providers[key]
                 if ('installer' in provider) {

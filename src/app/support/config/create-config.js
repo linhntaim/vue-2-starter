@@ -1,11 +1,11 @@
-import {registerPropertyFactory} from '../helpers'
+import {registerGlobalPropertyFactory} from '../helpers'
 import {Config} from './config'
 
 export function createConfig(configs) {
     return {
         installer: {
             install(Vue) {
-                registerPropertyFactory(Vue, '$config', function () {
+                registerGlobalPropertyFactory(Vue, '$config', function () {
                     return new Config(configs)
                 })
             },

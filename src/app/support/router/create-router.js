@@ -5,17 +5,19 @@ import VueRouter from 'vue-router'
 const middlewares = new Middlewares()
 
 export function createRouter(options = {}) {
-    if (!('mode' in options)) {
-        options.mode = 'history'
-    }
-    if (!('base' in options)) {
-        options.base = process.env.BASE_URL
-    }
     return {
         installer: VueRouter,
         inject: () => ({
             router: take(
-                new VueRouter(options),
+                new VueRouter(
+                    Object.assign(
+                        {
+                            mode: 'history',
+                            base: process.env.BASE_URL,
+                        },
+                        options || {},
+                    ),
+                ),
                 function (router) {
                     router.beforeEach((to, from, next) => {
                         middlewares.collect(to).beforeEach(to, from, next)

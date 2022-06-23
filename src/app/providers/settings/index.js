@@ -1,5 +1,5 @@
 import {localization as config} from '@/config'
-import {registerPropertyFactory, str} from '@/app/support/helpers'
+import {registerGlobalPropertyFactory, str} from '@/app/support/helpers'
 import {I18LocaleHandler, Settings} from '@/app/support/settings'
 
 const localeHandler = new I18LocaleHandler(config.locale.supported)
@@ -13,7 +13,7 @@ export const i18n = localeHandler.createI18Provider({
 export const localization = {
     installer: {
         install(Vue) {
-            registerPropertyFactory(Vue, '$settings', function (app) {
+            registerGlobalPropertyFactory(Vue, '$settings', function (app) {
                 settings
                     .setLocaleApply((locale, changed) => {
                         if (changed) {
@@ -51,7 +51,7 @@ export const localization = {
                     })
                 return settings
             })
-            registerPropertyFactory(Vue, '$setLocale', function (app) {
+            registerGlobalPropertyFactory(Vue, '$setLocale', function (app) {
                 return locale => {
                     app.$log.debug('locale', 'applying', locale)
                     return app.$settings.setLocale(locale).apply()

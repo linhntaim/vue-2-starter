@@ -1,14 +1,14 @@
-import {registerPropertyFactory} from '../helpers'
+import {registerGlobalPropertyFactory} from '../helpers'
 import {Encryption} from './encryption'
 
 export function createEncryption(extend = {}) {
     return {
         installer: {
             install(Vue) {
-                registerPropertyFactory(Vue, '$encryption', function (app) {
+                registerGlobalPropertyFactory(Vue, '$encryption', function (app) {
                     return new Encryption(app).extend(extend)
                 })
-                registerPropertyFactory(Vue, '$encryptor', function (app) {
+                registerGlobalPropertyFactory(Vue, '$encryptor', function (app) {
                     return app.$encryption.driver()
                 })
             },

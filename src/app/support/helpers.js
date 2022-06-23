@@ -34,13 +34,17 @@ export function dataGet(data, key, def = null) {
     return data == null ? def : data
 }
 
-export function registerPropertyFactory(Class, propertyName, getter) {
+export function registerPropertyFactory(object, propertyName, getter) {
     let $prop
-    Object.defineProperty(Class.prototype, propertyName, {
+    Object.defineProperty(object, propertyName, {
         get() {
             return typeof $prop !== 'undefined' ? $prop : $prop = getter(this)
         },
     })
+}
+
+export function registerGlobalPropertyFactory(Class, propertyName, getter) {
+    this.registerPropertyFactory(Class.prototype, propertyName, getter)
 }
 
 export const str = new Str()

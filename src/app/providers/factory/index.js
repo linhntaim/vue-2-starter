@@ -1,3 +1,3 @@
-import {createFactory} from '@/app/support/factory'
+import {createFactory} from '@/app/support/factories'
 
 export const factory = createFactory()
