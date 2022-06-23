@@ -5,7 +5,7 @@ export class Service extends Maker
     constructor(app) {
         super(app)
 
-        this.$request = this.app.prototype.$request
+        this.$request = this.app.$request
     }
 
     requestDriver() {

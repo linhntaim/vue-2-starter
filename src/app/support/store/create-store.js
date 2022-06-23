@@ -3,8 +3,8 @@ import Vuex from 'vuex'
 export function createStore(options = {}) {
     return {
         installer: Vuex,
-        injects: {
+        inject: () => ({
             store: new Vuex.Store(options),
-        },
+        }),
     }
 }

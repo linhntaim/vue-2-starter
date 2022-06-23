@@ -8,7 +8,7 @@ import {mapMutations} from 'vuex'
 export default {
     // eslint-disable-next-line
     name: 'Base',
-    beforeUnmount() {
+    beforeDestroy() {
         this.resetPasswordSetProgressing(false)
         this.resetPasswordReset()
     },

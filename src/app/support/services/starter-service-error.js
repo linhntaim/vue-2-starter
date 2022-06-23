@@ -1,5 +1,5 @@
-import {ServiceError} from './service-error'
 import {AxiosError} from 'axios'
+import {ServiceError} from './service-error'
 
 export class StarterServiceError extends ServiceError
 {

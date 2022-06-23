@@ -9,8 +9,8 @@ export class CacheManager extends Drivers
 
     storage(storageDriver) {
         return storageDriver
-            ? this.app.prototype.$storageManager.driver(storageDriver)
-            : this.app.prototype.$storage
+            ? this.app.$storageManager.driver(storageDriver)
+            : this.app.$storage
     }
 
     createStorage() {

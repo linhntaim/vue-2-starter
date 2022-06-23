@@ -34,4 +34,13 @@ export function dataGet(data, key, def = null) {
     return data == null ? def : data
 }
 
+export function registerPropertyFactory(Class, propertyName, getter) {
+    let $prop
+    Object.defineProperty(Class.prototype, propertyName, {
+        get() {
+            return typeof $prop !== 'undefined' ? $prop : $prop = getter(this)
+        },
+    })
+}
+
 export const str = new Str()

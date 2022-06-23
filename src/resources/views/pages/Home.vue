@@ -15,14 +15,17 @@ export default {
     components: {
         HelloWorld,
     },
-    beforeRouteEnter() { // cannot access `this`
+    beforeRouteEnter(to, from, next) { // cannot access `this`
         app.$log.debug('page', 'home.beforeRouteEnter')
+        next()
     },
-    beforeRouteUpdate() {
+    beforeRouteUpdate(to, from, next) {
         this.$log.debug('page', 'home.beforeRouteUpdate')
+        next()
     },
-    beforeRouteLeave() {
+    beforeRouteLeave(to, from, next) {
         this.$log.debug('page', 'home.beforeRouteLeave')
+        next()
     },
     beforeCreate() {
         this.$log.debug('page', 'home.beforeCreate')
@@ -42,11 +45,11 @@ export default {
     mounted() {
         this.$log.debug('page', 'home.mounted//rendered')
     },
-    beforeUnmount() {
-        this.$log.debug('page', 'home.beforeUnmount')
+    beforeDestroy() {
+        this.$log.debug('page', 'home.beforeDestroy')
     },
-    unmounted() {
-        this.$log.debug('page', 'home.unmounted')
+    destroyed() {
+        this.$log.debug('page', 'home.destroyed')
     },
 }
 </script>

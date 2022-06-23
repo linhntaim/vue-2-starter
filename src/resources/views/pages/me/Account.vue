@@ -1,8 +1,8 @@
 <template lang="pug">
 .account
     h1 Account
-    div {{ account.name }}
-    div {{ account.email }}
+    div {{ accountName }}
+    div {{ accountEmail }}
 </template>
 
 <script>
@@ -15,6 +15,12 @@ export default {
         ...mapGetters({
             account: 'account/account',
         }),
+        accountName() {
+            return this.account?.name
+        },
+        accountEmail() {
+            return this.account?.email
+        },
     },
 }
 </script>

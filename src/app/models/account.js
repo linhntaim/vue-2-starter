@@ -1,6 +1,6 @@
 import {app} from '@/bootstrap/app'
-import {AuthService} from '@/app/services/starter/auth-service'
 import {AccountService} from '@/app/services/starter/account-service'
+import {AuthService} from '@/app/services/starter/auth-service'
 
 export const account = {
     namespaced: true,

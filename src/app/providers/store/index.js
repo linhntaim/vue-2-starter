@@ -1,4 +1,4 @@
-import * as modules from '../../models'
+import * as modules from '@/app/models'
 import {createStore} from '@/app/support/store'
 
 export const store = createStore({

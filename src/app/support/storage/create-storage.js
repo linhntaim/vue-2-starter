@@ -1,13 +1,19 @@
+import {registerPropertyFactory} from '../helpers'
 import {StorageManager} from './storage-manager'
 
 export function createStorage(extend = {}) {
     return {
         installer: {
             install(vueApp) {
-                const storageManager = new StorageManager(vueApp).extend(extend)
-                vueApp.prototype.$storageManager = storageManager
-                vueApp.prototype.$storage = storageManager.driver()
-                vueApp.prototype.$cookie = storageManager.driver('cookie')
+                registerPropertyFactory(vueApp, '$storageManager', function (app) {
+                    return new StorageManager(app).extend(extend)
+                })
+                registerPropertyFactory(vueApp, '$storage', function (app) {
+                    return app.$storageManager.driver()
+                })
+                registerPropertyFactory(vueApp, '$cookie', function (app) {
+                    return app.$storageManager.driver('cookie')
+                })
             },
         },
     }

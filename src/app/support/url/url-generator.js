@@ -5,8 +5,8 @@ export class UrlGenerator extends Maker
     constructor(app) {
         super(app)
 
-        this.url = this.app.prototype.$config.app.url
-        this.router = this.app.prototype.$router
+        this.url = this.app.$config.app.url
+        this.router = this.app.$router
     }
 
     concat(...args) {
@@ -19,6 +19,6 @@ export class UrlGenerator extends Maker
     }
 
     route(location) {
-        return this.concat(this.router.resolve(location).path.substr(1))
+        return this.concat(this.router.resolve(location).href.substr(1))
     }
 }

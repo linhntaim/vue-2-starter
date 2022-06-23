@@ -1,8 +1,8 @@
-import {Service} from './service'
 import {take} from '../helpers'
 import {AxiosError} from 'axios'
+import {Service} from './service'
+import {ServiceError} from './service-error'
 import {StarterServiceError} from './starter-service-error'
-import {ServiceError} from '@/app/support/services/service-error'
 
 /**
  * @property {AxiosInstance} request

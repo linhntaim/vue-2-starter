@@ -1,3 +1,4 @@
+import {factory} from './factory'
 import {config} from './config'
 import {log} from './log'
 import {service} from './service'
@@ -11,6 +12,7 @@ import {url} from './url'
 
 // Should be maintained in order
 export const providers = {
+    factory,
     config,
     log,
     service,

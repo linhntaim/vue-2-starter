@@ -18,7 +18,7 @@ export const services = {
                 })(),
                 headers: (() => {
                     const headers = {}
-                    if (process.env.VUE_APP_SERVICE_CLIENT) {
+                    if ('VUE_APP_SERVICE_CLIENT' in process.env) {
                         headers['X-Client'] = process.env.VUE_APP_SERVICE_CLIENT
                     }
                     return headers

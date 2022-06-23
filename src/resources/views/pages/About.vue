@@ -30,14 +30,17 @@ export default {
             this.$setLocale(this.locale)
         },
     },
-    beforeRouteEnter() { // cannot access `this`
+    beforeRouteEnter(to, from, next) { // cannot access `this`
         app.$log.debug('page', 'about.beforeRouteEnter')
+        next()
     },
-    beforeRouteUpdate() {
+    beforeRouteUpdate(to, from, next) {
         this.$log.debug('page', 'about.beforeRouteUpdate')
+        next()
     },
-    beforeRouteLeave() {
+    beforeRouteLeave(to, from, next) {
         this.$log.debug('page', 'about.beforeRouteLeave')
+        next()
     },
     beforeCreate() {
         this.$log.debug('page', 'about.beforeCreate')
@@ -57,11 +60,11 @@ export default {
     mounted() {
         this.$log.debug('page', 'about.mounted//rendered')
     },
-    beforeUnmount() {
-        this.$log.debug('page', 'about.beforeUnmount')
+    beforeDestroy() {
+        this.$log.debug('page', 'about.beforeDestroy')
     },
-    unmounted() {
-        this.$log.debug('page', 'about.unmounted')
+    destroyed() {
+        this.$log.debug('page', 'about.destroyed')
     },
 }
 </script>

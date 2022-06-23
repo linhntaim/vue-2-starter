@@ -5,7 +5,23 @@ import {ServiceError} from '@/app/support/services'
 
 export class Fresh extends Middleware
 {
+    waitAppResolved() {
+        return new Promise(resolve => {
+            const resolveApp = () => {
+                if (!app) {
+                    setTimeout(resolveApp, 1000)
+                }
+                else {
+                    resolve(app)
+                }
+            }
+            resolveApp()
+        })
+    }
+
+    // eslint-disable-next-line
     async beforeEach(to, from, next) {
+        await this.waitAppResolved() // trick
         const fresh = app.$start.isFresh()
         app.$start.continue()
         if (fresh) {

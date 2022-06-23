@@ -13,7 +13,7 @@ export function createRouter(options = {}) {
     }
     return {
         installer: VueRouter,
-        injects: {
+        inject: () => ({
             router: take(
                 new VueRouter(options),
                 function (router) {
@@ -28,6 +28,6 @@ export function createRouter(options = {}) {
                     })
                 },
             ),
-        },
+        }),
     }
 }

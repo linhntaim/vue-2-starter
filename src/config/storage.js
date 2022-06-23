@@ -1,12 +1,14 @@
+import {app} from '@/config/app'
+
 export const storage = {
     default: 'local',
     drivers: {
         local: {
-            prefix: process.env.VUE_APP_ID + '__',
+            prefix: app.id + '__',
             flatten: true,
         },
         cookie: {
-            prefix: process.env.VUE_APP_ID + '__',
+            prefix: app.id + '__',
             flatten: true,
             // encrypt: true,
         },

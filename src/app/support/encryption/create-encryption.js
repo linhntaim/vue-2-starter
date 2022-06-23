@@ -1,12 +1,16 @@
+import {registerPropertyFactory} from '../helpers'
 import {Encryption} from './encryption'
 
 export function createEncryption(extend = {}) {
     return {
         installer: {
             install(vueApp) {
-                const encryption = new Encryption(vueApp).extend(extend)
-                vueApp.prototype.$encryption = encryption
-                vueApp.prototype.$encryptor = encryption.driver()
+                registerPropertyFactory(vueApp, '$encryption', function (app) {
+                    return new Encryption(app).extend(extend)
+                })
+                registerPropertyFactory(vueApp, '$encryptor', function (app) {
+                    return app.$encryption.driver()
+                })
             },
         },
     }

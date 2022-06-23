@@ -10,12 +10,12 @@ export class StarterEncryptor extends Encryptor
     }
 
     async encrypt(data) {
-        const response = await this.app.prototype.$service(EncryptService).encrypt(data)
+        const response = await this.app.$service(EncryptService).encrypt(data)
         return response.encrypted
     }
 
     async decrypt(data) {
-        const response = await this.app.prototype.$service(EncryptService).decrypt(data)
+        const response = await this.app.$service(EncryptService).decrypt(data)
         return response.decrypted
     }
 }

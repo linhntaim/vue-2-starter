@@ -1,13 +1,16 @@
+import {registerPropertyFactory} from '../helpers'
 import {RequestManager} from './request-manager'
-import {Singleton} from '../singleton'
 
 export function createService(extend = {}) {
     return {
         installer: {
             install(vueApp) {
-                const singleton = new Singleton(vueApp)
-                vueApp.prototype.$request = new RequestManager(vueApp).extend(extend)
-                vueApp.prototype.$service = ServiceClass => singleton.make(ServiceClass)
+                registerPropertyFactory(vueApp, '$request', function (app) {
+                    return new RequestManager(app).extend(extend)
+                })
+                registerPropertyFactory(vueApp, '$service', function (app) {
+                    return ServiceClass => app.$singleton.make(ServiceClass)
+                })
             },
         },
     }
