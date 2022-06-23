@@ -5,9 +5,11 @@ export function createUrl() {
     return {
         installer: {
             install(Vue) {
-                registerGlobalPropertyFactory(Vue, '$url', function (app) {
-                    return new UrlGenerator(app)
-                })
+                registerGlobalPropertyFactory(
+                    Vue,
+                    '$url',
+                    app => new UrlGenerator(app),
+                )
             },
         },
     }

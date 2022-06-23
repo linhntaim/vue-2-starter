@@ -4,8 +4,10 @@ export function createStart(vueStart) {
     return {
         installer: {
             install(Vue) {
-                registerGlobalPropertyFactory(Vue, '$start', function () {
-                    return {
+                registerGlobalPropertyFactory(
+                    Vue,
+                    '$start',
+                    () => ({
                         fresh: 0,
                         freshStart: vueStart,
                         isFresh() {
@@ -18,8 +20,8 @@ export function createStart(vueStart) {
                         reset() {
                             this.fresh = 0
                         },
-                    }
-                })
+                    }),
+                )
             },
         },
     }

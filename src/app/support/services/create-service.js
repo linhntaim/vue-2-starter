@@ -5,12 +5,16 @@ export function createService(extend = {}) {
     return {
         installer: {
             install(Vue) {
-                registerGlobalPropertyFactory(Vue, '$request', function (app) {
-                    return new RequestManager(app).extend(extend)
-                })
-                registerGlobalPropertyFactory(Vue, '$service', function (app) {
-                    return ServiceClass => app.$singleton.make(ServiceClass)
-                })
+                registerGlobalPropertyFactory(
+                    Vue,
+                    '$request',
+                    app => new RequestManager(app).extend(extend),
+                )
+                registerGlobalPropertyFactory(
+                    Vue,
+                    '$service',
+                    app => ServiceClass => app.$singleton.make(ServiceClass),
+                )
             },
         },
     }

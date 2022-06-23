@@ -5,12 +5,16 @@ export function createLog(extend = {}) {
     return {
         installer: {
             install(Vue) {
-                registerGlobalPropertyFactory(Vue, '$logManager', function (app) {
-                    return new LogManager(app).extend(extend)
-                })
-                registerGlobalPropertyFactory(Vue, '$log', function (app) {
-                    return app.$logManager.driver()
-                })
+                registerGlobalPropertyFactory(
+                    Vue,
+                    '$logManager',
+                    app => new LogManager(app).extend(extend),
+                )
+                registerGlobalPropertyFactory(
+                    Vue,
+                    '$log',
+                    app => app.$logManager.driver(),
+                )
             },
         },
     }

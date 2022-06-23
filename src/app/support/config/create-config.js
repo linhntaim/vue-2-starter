@@ -5,9 +5,11 @@ export function createConfig(configs) {
     return {
         installer: {
             install(Vue) {
-                registerGlobalPropertyFactory(Vue, '$config', function () {
-                    return new Config(configs)
-                })
+                registerGlobalPropertyFactory(
+                    Vue,
+                    '$config',
+                    () => new Config(configs),
+                )
             },
         },
     }

@@ -5,15 +5,21 @@ export function createStorage(extend = {}) {
     return {
         installer: {
             install(Vue) {
-                registerGlobalPropertyFactory(Vue, '$storageManager', function (app) {
-                    return new StorageManager(app).extend(extend)
-                })
-                registerGlobalPropertyFactory(Vue, '$storage', function (app) {
-                    return app.$storageManager.driver()
-                })
-                registerGlobalPropertyFactory(Vue, '$cookie', function (app) {
-                    return app.$storageManager.driver('cookie')
-                })
+                registerGlobalPropertyFactory(
+                    Vue,
+                    '$storageManager',
+                    app => new StorageManager(app).extend(extend),
+                )
+                registerGlobalPropertyFactory(
+                    Vue,
+                    '$storage',
+                    app => app.$storageManager.driver(),
+                )
+                registerGlobalPropertyFactory(
+                    Vue,
+                    '$cookie',
+                    app => app.$storageManager.driver('cookie'),
+                )
             },
         },
     }

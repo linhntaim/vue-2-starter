@@ -5,12 +5,16 @@ export function createCache(extend = {}) {
     return {
         installer: {
             install(Vue) {
-                registerGlobalPropertyFactory(Vue, '$cacheManager', function(app)  {
-                    return new CacheManager(app).extend(extend)
-                })
-                registerGlobalPropertyFactory(Vue, '$cache', function(app)  {
-                    return app.$cacheManager.driver()
-                })
+                registerGlobalPropertyFactory(
+                    Vue,
+                    '$cacheManager',
+                    app => new CacheManager(app).extend(extend),
+                )
+                registerGlobalPropertyFactory(
+                    Vue,
+                    '$cache',
+                    app => app.$cacheManager.driver(),
+                )
             },
         },
     }

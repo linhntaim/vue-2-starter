@@ -5,9 +5,11 @@ export function createFactory() {
     return {
         installer: {
             install(Vue) {
-                registerGlobalPropertyFactory(Vue, '$singleton', function (app) {
-                    return new Singleton(app)
-                })
+                registerGlobalPropertyFactory(
+                    Vue,
+                    '$singleton',
+                    app => new Singleton(app),
+                )
             },
         },
     }
