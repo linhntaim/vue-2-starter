@@ -44,7 +44,7 @@ export function registerPropertyFactory(object, propertyName, getter) {
 }
 
 export function registerGlobalPropertyFactory(Class, propertyName, getter) {
-    this.registerPropertyFactory(Class.prototype, propertyName, getter)
+    registerPropertyFactory(Class.prototype, propertyName, getter)
 }
 
 export const str = new Str()
