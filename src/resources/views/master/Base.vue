@@ -4,19 +4,18 @@
         router-link(:to="{name: 'root'}") Home
         | &nbsp;|&nbsp;
         router-link(:to="{name: 'about'}") About
-        template(v-if="!static")
-            template(v-if="accountIsLoggedIn")
-                | &nbsp;|&nbsp;
-                router-link(:to="{name: 'account'}") Account
-                | &nbsp;|&nbsp;
-                a(@click.prevent="onLogoutClick" href="#") Logout
-            template(v-else)
-                | &nbsp;|&nbsp;
-                router-link(:to="{name: 'login'}") Login
-                | &nbsp;|&nbsp;
-                router-link(:to="{name: 'register'}") Register
-                | &nbsp;|&nbsp;
-                router-link(:to="{name: 'password.request'}") Forgot password
+        template(v-if="accountIsLoggedIn")
+            | &nbsp;|&nbsp;
+            router-link(:to="{name: 'account'}") Account
+            | &nbsp;|&nbsp;
+            a(@click.prevent="onLogoutClick" href="#") Logout
+        template(v-else)
+            | &nbsp;|&nbsp;
+            router-link(:to="{name: 'login'}") Login
+            | &nbsp;|&nbsp;
+            router-link(:to="{name: 'register'}") Register
+            | &nbsp;|&nbsp;
+            router-link(:to="{name: 'password.request'}") Forgot password
     router-view
 </template>
 
@@ -26,11 +25,6 @@ import {mapActions, mapGetters} from 'vuex'
 export default {
     // eslint-disable-next-line
     name: 'Base',
-    data() {
-        return {
-            static: this.$config.app.static,
-        }
-    },
     computed: {
         ...mapGetters({
             accountIsLoggedIn: 'account/isLoggedIn',

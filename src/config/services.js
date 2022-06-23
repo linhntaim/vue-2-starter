@@ -6,21 +6,16 @@ export const services = {
         drivers: {
             starter: {
                 baseURL: (() => {
-                    if ('VUE_APP_SERVICE_URL' in process.env) {
-                        let serviceUrl = process.env.VUE_APP_SERVICE_URL
-                        if (/^https?:\/\//.test(serviceUrl)) {
-                            return serviceUrl
-                        }
-                        serviceUrl = trim(serviceUrl, '/')
-                        return window.location.origin + (serviceUrl ? '/' + serviceUrl : '')
+                    let serviceUrl = process.env.VUE_APP_STARTER_SERVICE_URL || (window.location.origin + '/api')
+                    if (/^https?:\/\//.test(serviceUrl)) {
+                        return serviceUrl
                     }
-                    return null
+                    serviceUrl = trim(serviceUrl, '/')
+                    return window.location.origin + (serviceUrl ? '/' + serviceUrl : '')
                 })(),
                 headers: (() => {
                     const headers = {}
-                    if ('VUE_APP_SERVICE_CLIENT' in process.env) {
-                        headers['X-Client'] = process.env.VUE_APP_SERVICE_CLIENT
-                    }
+                    headers['X-Client'] = process.env.VUE_APP_STARTER_SERVICE_CLIENT || 'default'
                     return headers
                 })(),
             },
