@@ -4,11 +4,11 @@ import {LogManager} from './log-manager'
 export function createLog(extend = {}) {
     return {
         installer: {
-            install(vueApp) {
-                registerPropertyFactory(vueApp, '$logManager', function (app) {
+            install(Vue) {
+                registerPropertyFactory(Vue, '$logManager', function (app) {
                     return new LogManager(app).extend(extend)
                 })
-                registerPropertyFactory(vueApp, '$log', function (app) {
+                registerPropertyFactory(Vue, '$log', function (app) {
                     return app.$logManager.driver()
                 })
             },

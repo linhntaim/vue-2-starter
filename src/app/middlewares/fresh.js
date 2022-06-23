@@ -19,7 +19,6 @@ export class Fresh extends Middleware
         })
     }
 
-    // eslint-disable-next-line
     async beforeEach(to, from, next) {
         await this.waitAppResolved() // trick
         const fresh = app.$start.isFresh()

@@ -4,11 +4,11 @@ import {Encryption} from './encryption'
 export function createEncryption(extend = {}) {
     return {
         installer: {
-            install(vueApp) {
-                registerPropertyFactory(vueApp, '$encryption', function (app) {
+            install(Vue) {
+                registerPropertyFactory(Vue, '$encryption', function (app) {
                     return new Encryption(app).extend(extend)
                 })
-                registerPropertyFactory(vueApp, '$encryptor', function (app) {
+                registerPropertyFactory(Vue, '$encryptor', function (app) {
                     return app.$encryption.driver()
                 })
             },

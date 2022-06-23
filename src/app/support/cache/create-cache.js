@@ -4,11 +4,11 @@ import {CacheManager} from './cache-manager'
 export function createCache(extend = {}) {
     return {
         installer: {
-            install(vueApp) {
-                registerPropertyFactory(vueApp, '$cacheManager', function(app)  {
+            install(Vue) {
+                registerPropertyFactory(Vue, '$cacheManager', function(app)  {
                     return new CacheManager(app).extend(extend)
                 })
-                registerPropertyFactory(vueApp, '$cache', function(app)  {
+                registerPropertyFactory(Vue, '$cache', function(app)  {
                     return app.$cacheManager.driver()
                 })
             },
