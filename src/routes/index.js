@@ -22,7 +22,7 @@ export const routes = [
                     {
                         path: '404',
                         name: 'not_found',
-                        component: () => import(/* webpackChunkName: "view-not-found" */ '@/resources/views/errors/NotFound'),
+                        component: () => import(/* webpackChunkName: "view-error-not-found" */ '@/resources/views/errors/NotFound'),
                     },
                     //
                 ],
