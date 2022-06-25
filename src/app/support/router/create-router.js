@@ -2,9 +2,7 @@ import {take} from '../helpers'
 import {Middlewares} from './middlewares'
 import VueRouter from 'vue-router'
 
-const middlewares = new Middlewares()
-
-export function createRouter(options = {}) {
+export function createRouter(env, options = {}) {
     return {
         installer: VueRouter,
         inject: () => ({
@@ -13,20 +11,23 @@ export function createRouter(options = {}) {
                     Object.assign(
                         {
                             mode: 'history',
-                            base: process.env.BASE_URL,
+                            base: env.BASE_URL,
                         },
                         options || {},
                     ),
                 ),
                 router => {
+                    let middlewares = null
+                    const createMiddlewares = app => middlewares ? middlewares : middlewares = new Middlewares(app)
+
                     router.beforeEach(
-                        (to, from, next) => middlewares.collect(to).beforeEach(to, from, next),
+                        (to, from, next) => createMiddlewares(router.app).collect(to).beforeEach(to, from, next),
                     )
                     router.beforeResolve(
-                        (to, from, next) => middlewares.collect(to).beforeResolve(to, from, next),
+                        (to, from, next) => createMiddlewares(router.app).beforeResolve(to, from, next),
                     )
                     router.afterEach(
-                        (to, from) => middlewares.collect(to).afterEach(to, from),
+                        (to, from) => createMiddlewares(router.app).afterEach(to, from),
                     )
                 },
             ),
