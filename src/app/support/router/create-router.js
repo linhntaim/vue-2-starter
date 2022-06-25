@@ -2,8 +2,6 @@ import {take} from '../helpers'
 import {Middlewares} from './middlewares'
 import VueRouter from 'vue-router'
 
-const middlewares = new Middlewares()
-
 export function createRouter(env, options = {}) {
     return {
         installer: VueRouter,
@@ -19,14 +17,17 @@ export function createRouter(env, options = {}) {
                     ),
                 ),
                 router => {
+                    let middlewares = null
+                    const createMiddlewares = app => middlewares ? middlewares : middlewares = new Middlewares(app)
+
                     router.beforeEach(
-                        (to, from, next) => middlewares.collect(to).beforeEach(to, from, next),
+                        (to, from, next) => createMiddlewares(router.app).collect(to).beforeEach(to, from, next),
                     )
                     router.beforeResolve(
-                        (to, from, next) => middlewares.collect(to).beforeResolve(to, from, next),
+                        (to, from, next) => createMiddlewares(router.app).beforeResolve(to, from, next),
                     )
                     router.afterEach(
-                        (to, from) => middlewares.collect(to).afterEach(to, from),
+                        (to, from) => createMiddlewares(router.app).afterEach(to, from),
                     )
                 },
             ),
