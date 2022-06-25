@@ -1,4 +1,3 @@
-import {app} from '@/bootstrap/app'
 import {AuthService} from '@/app/services/starter/auth-service'
 
 export const forgotPassword = {
@@ -18,7 +17,7 @@ export const forgotPassword = {
     },
     actions: {
         forgotPassword(context, params = {}) {
-            return app.$service(AuthService).forgotPassword(Object.assign({
+            return this.app.$service(AuthService).forgotPassword(Object.assign({
                 email: context.state.email,
             }, params))
         },

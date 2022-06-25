@@ -1,4 +1,3 @@
-import {app} from '@/bootstrap/app'
 import {AuthService} from '@/app/services/starter/auth-service'
 
 export const resetPassword = {
@@ -24,7 +23,7 @@ export const resetPassword = {
     },
     actions: {
         resetPassword(context) {
-            return app.$service(AuthService).resetPassword({
+            return this.app.$service(AuthService).resetPassword({
                 token: context.state.token,
                 email: context.state.email,
                 password: context.state.password,
