@@ -87,7 +87,7 @@ export const routes = [
                     },
                     {
                         path: 'reset-password',
-                        component: () => import(/* webpackChunkName: "view-auth-reset-password-index" */ '@/resources/views/pages/auth/reset-password/Base'),
+                        component: () => import(/* webpackChunkName: "view-auth-reset-password-base" */ '@/resources/views/pages/auth/reset-password/Base'),
                         children: [
                             {
                                 path: ':token',
