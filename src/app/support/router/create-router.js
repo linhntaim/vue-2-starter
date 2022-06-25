@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 
 const middlewares = new Middlewares()
 
-export function createRouter(options = {}) {
+export function createRouter(env, options = {}) {
     return {
         installer: VueRouter,
         inject: () => ({
@@ -13,7 +13,7 @@ export function createRouter(options = {}) {
                     Object.assign(
                         {
                             mode: 'history',
-                            base: process.env.BASE_URL,
+                            base: env.BASE_URL,
                         },
                         options || {},
                     ),
