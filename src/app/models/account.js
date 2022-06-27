@@ -17,12 +17,12 @@ export const account = {
             state.token.accessToken = accessToken
             state.token.expiredAt = expiredAt
 
-            this.app.$request.with('starter', axios => {
+            this.app.$request.mod('starter', axios => {
                 if (type === 'bearer' && accessToken) {
                     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
                 }
                 return axios
-            }, 'header.authorization')
+            })
         },
         setTokenCookie(state) {
             this.app.$cookie.put('model.account.token', {
@@ -44,10 +44,10 @@ export const account = {
             }
             state.account = null
 
-            this.app.$request.with('starter', axios => {
+            this.app.$request.mod('starter', axios => {
                 delete axios.defaults.headers.common['Authorization']
                 return axios
-            }, 'header.authorization')
+            })
             this.app.$cookie.remove('model.account.token')
         },
     },
