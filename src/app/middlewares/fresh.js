@@ -1,28 +1,12 @@
-import {app} from '@/bootstrap/app'
 import {localization} from '@/config'
 import {Middleware} from '@/app/support/router'
 import {ServiceError} from '@/app/support/services'
 
 export class Fresh extends Middleware
 {
-    waitAppResolved() {
-        return new Promise(resolve => {
-            const resolveApp = () => {
-                if (!app) {
-                    setTimeout(resolveApp, 1000)
-                }
-                else {
-                    resolve(app)
-                }
-            }
-            resolveApp()
-        })
-    }
-
     async beforeEach(to, from, next) {
-        await this.waitAppResolved() // trick
-        const fresh = app.$start.isFresh()
-        app.$start.continue()
+        const fresh = this.app.$start.isFresh()
+        this.app.$start.continue()
         if (fresh) {
             if (!(await this.restoreFromServer(to, from, next))) {
                 return
@@ -34,11 +18,11 @@ export class Fresh extends Middleware
     }
 
     async restoreFromServer(to, from, next) {
-        const data = await app.$store.dispatch('prerequisite/require', ['server']).catch(err => err)
-        app.$log.debug('middleware', 'fresh.restoreFromServer', data)
+        const data = await this.app.$store.dispatch('prerequisite/require', ['server']).catch(err => err)
+        this.app.$log.debug('middleware', 'fresh.restoreFromServer', data)
         if (data instanceof ServiceError) {
-            app.$start.reset()
-            const connectionLostRoute = app.$config.app.routes.connection_lost
+            this.app.$start.reset()
+            const connectionLostRoute = this.app.$config.app.routes.connection_lost
             if (to.name !== connectionLostRoute.name) {
                 next(connectionLostRoute)
                 return false
@@ -48,19 +32,19 @@ export class Fresh extends Middleware
     }
 
     async restoreFromCache() {
-        app.$log.debug('middleware', 'fresh.restoreFromCache')
+        this.app.$log.debug('middleware', 'fresh.restoreFromCache')
         //
     }
 
     async restoreFromCookie() {
-        app.$log.debug('middleware', 'fresh.restoreFromCookie')
+        this.app.$log.debug('middleware', 'fresh.restoreFromCookie')
         // settings
-        await app.$settings
-            .set(await app.$cookie.get('settings', {
+        await this.app.$settings
+            .set(await this.app.$cookie.get('settings', {
                 locale: localization.locale.default,
             }))
             .apply()
         // account
-        await app.$store.dispatch('account/restoreFromCookie')
+        await this.app.$store.dispatch('account/restoreFromCookie')
     }
 }

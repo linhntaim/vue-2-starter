@@ -1,4 +1,3 @@
-import {app} from '@/bootstrap/app'
 import {only} from '@/app/support/helpers'
 import {PrerequisiteService} from '@/app/services/starter/prerequisite-service'
 
@@ -22,7 +21,7 @@ export const prerequisite = {
                 name => !(name in context.state.metadata) && notExisted.push(name),
             )
             return notExisted.length
-                ? app.$service(PrerequisiteService)
+                ? this.app.$service(PrerequisiteService)
                     .done(data => notExisted.forEach(name => context.commit('setData', {name, data: data[name]})))
                     .require(notExisted)
                 : Promise.resolve(only(context.state.metadata, names))

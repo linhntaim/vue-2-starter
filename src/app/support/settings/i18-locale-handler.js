@@ -4,7 +4,7 @@ import VueI18n from 'vue-i18n'
 
 export class I18LocaleHandler extends LocaleHandler
 {
-    createI18Provider(options = {}) {
+    createI18Provider(env, options = {}) {
         return {
             installer: VueI18n,
             inject: () => ({
@@ -13,8 +13,8 @@ export class I18LocaleHandler extends LocaleHandler
                         take(
                             Object.assign(
                                 {
-                                    locale: process.env.VUE_APP_I18N_LOCALE || 'en',
-                                    fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
+                                    locale: env.VUE_APP_I18N_LOCALE || 'en',
+                                    fallbackLocale: env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
                                 },
                                 options || {},
                             ),
