@@ -1,8 +1,8 @@
-# demo-2
+# vue-2-starter
 
 ## Project setup
 ```
-npm install
+npm install && npm run setup
 ```
 
 ### Compiles and hot-reloads for development
