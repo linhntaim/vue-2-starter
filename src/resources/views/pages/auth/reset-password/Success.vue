@@ -17,7 +17,7 @@ export default {
     },
     created() {
         if (!this.resetPasswordProgressing) {
-            this.$router.push({name: 'login'})
+            this.$router.push(this.$config.app.routes.login)
         }
         this.resetPasswordSetProgressing(false)
     },

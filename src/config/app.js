@@ -16,8 +16,20 @@ export const app = {
         redirect_if_unauthenticated: {
             name: 'unauthenticated',
         },
+        redirect_after_unauthenticated: {
+            name: 'root',
+        },
         redirect_if_authenticated: {
             name: 'root',
+        },
+        redirect_after_authenticated: {
+            name: 'root',
+        },
+        login: {
+            name: 'login',
+        },
+        logout: {
+            name: 'logout',
         },
     },
 }

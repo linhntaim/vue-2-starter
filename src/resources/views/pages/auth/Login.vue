@@ -50,7 +50,7 @@ export default {
             }).then(() => {
                 this.loading._ = false
                 if (this.accountIsLoggedIn) {
-                    this.$router.push({name: 'root'})
+                    this.$router.push(this.$config.app.routes.redirect_after_authenticated)
                 }
             }).catch(err => {
                 this.loading._ = false

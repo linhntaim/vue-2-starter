@@ -125,6 +125,11 @@ export const routes = [
                 },
                 children: [
                     {
+                        path: 'auth/logout',
+                        name: 'logout',
+                        component: () => import(/* webpackChunkName: "view-auth-logout" */ '@/resources/views/pages/auth/Logout'),
+                    },
+                    {
                         path: 'account',
                         name: 'account',
                         component: () => import(/* webpackChunkName: "view-me-account" */ '@/resources/views/pages/me/Account'),

@@ -93,7 +93,7 @@ export default {
         onSubmit() {
             this.loading._ = true
             this.register({
-                login_url: this.$url.route({name: 'login'}),
+                login_url: this.$url.route(this.$config.app.routes.login),
             }).then(() => {
                 this.loading._ = false
                 this.registerSetProgressing(true)

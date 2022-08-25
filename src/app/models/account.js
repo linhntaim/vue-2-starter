@@ -10,6 +10,7 @@ export const account = {
             accessToken: null,
             expiredAt: null,
         },
+        logoutActivated: false,
     }),
     mutations: {
         setToken(state, {type, accessToken, expiredAt}) {
@@ -35,6 +36,9 @@ export const account = {
         },
         setAccount(state, account) {
             state.account = account
+        },
+        activateLogout(state) {
+            state.logoutActivated = true
         },
         unset(state) {
             state.token = {
@@ -98,5 +102,6 @@ export const account = {
     getters: {
         account: state => state.account,
         isLoggedIn: state => state.account != null,
+        logoutActivated: state => state.logoutActivated,
     },
 }
