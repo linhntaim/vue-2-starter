@@ -1,6 +1,6 @@
 import {createStart} from '@/app/support/start'
 import {modify, time} from '@/app/support/helpers'
-import {providers} from '@/app/providers'
+import {mixins, providers} from '@/app/providers'
 import App from '@/resources/views/App'
 import Vue from 'vue'
 
@@ -14,6 +14,8 @@ export const app = new Vue(
             render: h => h(App),
         },
         function (options) {
+            // register mixins
+            mixins.forEach(mixin => Vue.mixin(mixin))
             // register start plugin
             Vue.use(createStart(vueStart).installer)
             // register plugins

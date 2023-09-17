@@ -18,6 +18,11 @@ import {app} from '@/bootstrap/app'
 export default {
     // eslint-disable-next-line
     name: 'About',
+    head() {
+        return {
+            title: 'About',
+        }
+    },
     data() {
         return {
             world: 'World',

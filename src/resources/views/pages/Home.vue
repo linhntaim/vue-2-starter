@@ -15,6 +15,11 @@ export default {
     components: {
         HelloWorld,
     },
+    head() {
+        return {
+            title: 'Home',
+        }
+    },
     beforeRouteEnter(to, from, next) { // cannot access `this`
         app.$log.debug('page', 'home.beforeRouteEnter')
         next()

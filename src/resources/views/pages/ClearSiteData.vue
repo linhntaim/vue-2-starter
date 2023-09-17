@@ -10,6 +10,11 @@ div
 <script>
 export default {
     name: 'ClearSiteData',
+    head() {
+        return {
+            title: 'Clear Site Data',
+        }
+    },
     data() {
         return {
             logs: [],

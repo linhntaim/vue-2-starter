@@ -1,6 +1,19 @@
 import {middlewares} from '@/app/middlewares'
 import Base from '@/resources/views/master/Base'
-import BaseError from '@/resources/views/master/BaseError'
+import BaseBlank from '@/resources/views/master/BaseBlank'
+
+const viewNotFound = () => import(/* webpackChunkName: "view-error-not-found" */ '@/resources/views/errors/NotFound')
+const fallbackRoute = {
+    path: ':pathMatch(.*)*',
+    component: viewNotFound,
+}
+const rootIncludedFallbackRoute = [
+    {
+        path: '',
+        component: viewNotFound,
+    },
+    fallbackRoute,
+]
 
 export const routes = [
     {
@@ -10,21 +23,22 @@ export const routes = [
             middleware: middlewares,
         },
         children: [
-            {
-                path: 'clear-site-data',
-                name: 'clear_site_data',
-                component: () => import(/* webpackChunkName: "view-clear-site-data" */ '@/resources/views/pages/ClearSiteData'),
-            },
+            // {
+            //     path: 'clear-site-data',
+            //     name: 'clear_site_data',
+            //     component: () => import(/* webpackChunkName: "view-clear-site-data" */ '@/resources/views/pages/ClearSiteData'),
+            // },
             {
                 path: 'error',
-                component: BaseError,
+                component: BaseBlank,
                 children: [
                     {
                         path: '404',
                         name: 'not_found',
-                        component: () => import(/* webpackChunkName: "view-error-not-found" */ '@/resources/views/errors/NotFound'),
+                        component: viewNotFound,
                     },
                     //
+                    ...rootIncludedFallbackRoute,
                 ],
             },
             {
@@ -39,10 +53,7 @@ export const routes = [
                 component: () => import(/* webpackChunkName: "view-about" */ '@/resources/views/pages/About'),
             },
             //
-            {
-                path: ':pathMatch(.*)*',
-                component: () => import(/* webpackChunkName: "view-welcome" */ '@/resources/views/pages/Welcome'),
-            },
+            fallbackRoute,
         ],
     },
 ]
