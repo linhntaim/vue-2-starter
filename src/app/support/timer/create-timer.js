@@ -1,4 +1,4 @@
-import {registerGlobalPropertyFactory} from '@/app/support/helpers'
+import {registerGlobalPropertyFactory} from '../helpers'
 import {Timer} from './timer'
 
 export function createTimer() {

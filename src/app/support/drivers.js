@@ -4,7 +4,6 @@ export class Drivers
 {
     constructor(app, configKey, defaultDriver = null) {
         this.app = app
-        this.config = app.$config
         this.configKey = configKey
         this.drivers = {}
         this.extended = {}
@@ -13,7 +12,7 @@ export class Drivers
     }
 
     getConfig(key, def = null) {
-        return this.config?.get(`${this.configKey}.${key}`, def) || def
+        return this.app.$config.get(`${this.configKey}.${key}`, def) || def
     }
 
     options(driver) {

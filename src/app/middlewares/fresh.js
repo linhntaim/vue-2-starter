@@ -1,4 +1,3 @@
-import {localization} from '@/config'
 import {Middleware} from '@/app/support/router'
 
 export class Fresh extends Middleware
@@ -26,7 +25,7 @@ export class Fresh extends Middleware
         // settings
         await this.app.$settings
             .set(await this.app.$cookie.get('settings', {
-                locale: localization.locale.default,
+                locale: this.app.$config.localization.locale.default,
             }))
             .apply()
     }

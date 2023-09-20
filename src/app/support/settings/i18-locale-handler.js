@@ -1,8 +1,8 @@
 import {take} from '../helpers'
-import {LocaleHandler} from './locale-handler'
+import {LazyLocaleHandler} from './lazy-locale-handler'
 import VueI18n from 'vue-i18n'
 
-export class I18LocaleHandler extends LocaleHandler
+export class I18LocaleHandler extends LazyLocaleHandler
 {
     createI18Provider(env, options = {}) {
         return {
@@ -35,13 +35,8 @@ export class I18LocaleHandler extends LocaleHandler
         return super.applyLocale(locale)
     }
 
-    setUnloadedLocale(locale) {
-        return import(/* webpackChunkName: "lang-[request]" */ `@/lang/${locale}.js`)
-            .then(messages => {
-                this.i18n.setLocaleMessage(locale, messages.default)
-                this.loadedLocales.push(locale)
-                return this.applyLocale(locale)
-            })
-            .catch(() => Promise.resolve(this.locale))
+    loadLocaleData(data, locale) {
+        this.i18n.setLocaleMessage(locale, data)
+        return super.loadLocaleData(data, locale)
     }
 }

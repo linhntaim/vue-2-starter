@@ -1,4 +1,4 @@
-import {registerPropertyFactory, take} from '@/app/support/helpers'
+import {registerPropertyFactory, take} from '../helpers'
 import Vuex from 'vuex'
 
 export function createStore(options = {}) {

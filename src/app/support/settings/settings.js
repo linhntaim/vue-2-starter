@@ -2,7 +2,8 @@ import {modify} from '../helpers'
 
 export class Settings
 {
-    constructor() {
+    constructor(app, options = {}) {
+        this.app = app
         this.settings = {
             locale: null,
             country: null,
@@ -16,8 +17,11 @@ export class Settings
         }
         this.applied()
 
-        this.localeHandler = null
-        this.applies = {}
+        this.localeHandler = 'localeHandler' in options ? options.localeHandler : null
+        this.applies = {
+            locale: 'localeApply' in options ? options.localeApply : null,
+            common: 'commonApply' in options ? options.commonApply : null,
+        }
     }
 
     applied() {
@@ -38,21 +42,6 @@ export class Settings
         return this
     }
 
-    setLocaleHandler(localeHandler) {
-        this.localeHandler = localeHandler
-        return this
-    }
-
-    setLocaleApply(callback) {
-        this.applies.locale = callback
-        return this
-    }
-
-    setCommonApply(callback) {
-        this.applies.common = callback
-        return this
-    }
-
     changes() {
         const changes = {}
         Object.keys(this.settings).forEach(
@@ -66,14 +55,14 @@ export class Settings
         return modify(this.localeHandler.setLocale(this.settings.locale), localePromise => {
             if (this.applies.locale) {
                 return localePromise.then(async (locale) => {
-                    await this.applies.locale(locale, changes.locale)
+                    await this.applies.locale(locale, changes.locale, this.app)
                     return locale
                 })
             }
             return localePromise
         }).then(async () => {
             if (this.applies.common) {
-                await this.applies.common(this.settings, changes)
+                await this.applies.common(this.settings, changes, this.app)
             }
             this.applied()
             return this.settings

@@ -1,5 +1,5 @@
-import {Drivers} from '../drivers'
 import {Base64Encryptor} from './base64-encryptor'
+import {Drivers} from '../drivers'
 
 export class Encryption extends Drivers
 {

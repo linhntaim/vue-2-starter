@@ -18,16 +18,27 @@ export function createRouter(env, options = {}) {
                 ),
                 router => {
                     let middlewares = null
-                    const createMiddlewares = app => middlewares ? middlewares : middlewares = new Middlewares(app)
 
                     router.beforeEach(
-                        (to, from, next) => createMiddlewares(router.app).collect(to).beforeEach(to, from, next),
+                        (to, from, next) => {
+                            if (!middlewares) {
+                                middlewares = new Middlewares(router.app)
+                            }
+                            router.app.$log.debug('router', 'beforeEach')
+                            middlewares.collect(to).beforeEach(to, from, next)
+                        },
                     )
                     router.beforeResolve(
-                        (to, from, next) => createMiddlewares(router.app).beforeResolve(to, from, next),
+                        (to, from, next) => {
+                            router.app.$log.debug('router', 'beforeResolve')
+                            middlewares.beforeResolve(to, from, next)
+                        },
                     )
                     router.afterEach(
-                        (to, from) => createMiddlewares(router.app).afterEach(to, from),
+                        (to, from) => {
+                            router.app.$log.debug('router', 'afterEach')
+                            middlewares.afterEach(to, from)
+                        },
                     )
                 },
             ),

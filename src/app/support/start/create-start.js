@@ -1,4 +1,4 @@
-import {registerGlobalPropertyFactory, time} from '@/app/support/helpers'
+import {registerGlobalPropertyFactory, time} from '../helpers'
 
 export function createStart(vueStart) {
     return {

@@ -1,6 +1,6 @@
 import {Num} from './num'
-import {Str} from './str'
 import {Obj} from './obj'
+import {Str} from './str'
 
 export function time() {
     return new Date().getTime()
@@ -50,5 +50,5 @@ export function registerGlobalPropertyFactory(Class, propertyName, getter) {
 }
 
 export const num = new Num()
-export const str = new Str()
 export const obj = new Obj()
+export const str = new Str()

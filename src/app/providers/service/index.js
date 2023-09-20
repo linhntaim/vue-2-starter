@@ -1,3 +1,3 @@
-import {createService} from '@/app/support/services/create-service'
+import {createService} from '@/app/support/services'
 
 export const service = createService()

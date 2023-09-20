@@ -1,5 +1,5 @@
-import {Drivers} from '../drivers'
 import {ConsoleLog} from './console-log'
+import {Drivers} from '../drivers'
 
 export class LogManager extends Drivers
 {

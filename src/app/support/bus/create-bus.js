@@ -1,4 +1,4 @@
-import {registerGlobalPropertyFactory} from '@/app/support/helpers'
+import {registerGlobalPropertyFactory} from '../helpers'
 import mitt from 'mitt'
 
 export function createBus() {
