@@ -23,11 +23,11 @@ export const routes = [
             middleware: middlewares,
         },
         children: [
-            // {
-            //     path: 'clear-site-data',
-            //     name: 'clear_site_data',
-            //     component: () => import(/* webpackChunkName: "view-clear-site-data" */ '@/resources/views/pages/ClearSiteData'),
-            // },
+            {
+                path: 'clear-site-data',
+                name: 'clear_site_data',
+                component: () => import(/* webpackChunkName: "view-clear-site-data" */ '@/resources/views/pages/ClearSiteData'),
+            },
             {
                 path: 'error',
                 component: BaseBlank,
